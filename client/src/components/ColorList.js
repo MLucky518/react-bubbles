@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors,getData }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -23,8 +24,17 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
   };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
+  const deleteColor = id => {
+    axiosWithAuth()
+    .delete(`colors/${id}`)
+    .then(res => {
+      console.log(res);
+       getData();
+    })
+
+    .catch(err => {
+      console.log(err);
+    });
   };
 
   return (
@@ -36,7 +46,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    deleteColor(color.id)
                   }
                 }>
                   x
