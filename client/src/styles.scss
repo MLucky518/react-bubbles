@@ -97,3 +97,18 @@ form {
     margin-top: 16px;
   }
 }
+
+.form-container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://w0.pngwave.com/png/67/605/bubble-water-bubbles-png-clip-art.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+
+
+  button{
+    
+  }
+}
